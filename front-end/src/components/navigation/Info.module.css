@@ -1,0 +1,19 @@
+.info {
+  padding-top: 20%;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  size-adjust: 400px;
+}
+
+.info div {
+  display: block;
+}
+
+.text-shadow {
+  text-shadow: -1px 0 rgb(32, 32, 32), 0 1px rgb(32, 32, 32),
+    1px 0 rgb(32, 32, 32), 0 -1px rgb(32, 32, 32);
+}

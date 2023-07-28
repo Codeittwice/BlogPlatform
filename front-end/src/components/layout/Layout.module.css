@@ -1,0 +1,13 @@
+.main {
+  margin: auto;
+  width: 100%;
+  max-width: 100%;
+}
+.main-container {
+  width: 50%;
+  text-align: center;
+  display: block;
+  padding: 5%;
+  margin: auto;
+  padding-top: 10%;
+}

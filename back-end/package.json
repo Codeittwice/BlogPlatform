@@ -1,0 +1,24 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mongo": "C:/Users/hmgad/MongoDB/bin/mongod.exe --dbpath=C:/Users/hmgad/MogoDB-data",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongodb": "^5.7.0",
+    "mongoose": "^7.4.1",
+    "nodemon": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.5"
+  }
+}

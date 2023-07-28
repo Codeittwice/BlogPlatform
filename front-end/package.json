@@ -1,0 +1,29 @@
+{
+  "name": "blog-platform",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@types/node": "20.4.5",
+    "axios": "^1.4.0",
+    "eslint": "8.45.0",
+    "eslint-config-next": "13.4.12",
+    "express": "^4.18.2",
+    "mongodb": "^5.7.0",
+    "mongoose": "^7.4.1",
+    "next": "13.4.12",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "5.1.6",
+    "webpack": "^5.88.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.17",
+    "@types/react-dom": "^18.2.7"
+  }
+}
