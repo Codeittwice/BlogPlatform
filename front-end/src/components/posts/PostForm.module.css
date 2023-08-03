@@ -54,21 +54,34 @@
   max-width: 100%;
 }
 
-.submit {
+.actions {
   display: flex;
   text-align: center;
+  justify-content: center;
   margin: auto;
   margin-top: 1rem;
 }
-.submit button {
+.submitBtn {
   padding: 1rem;
-  margin: auto;
+  margin: 0 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 24px;
+  border: 0;
+  color: white;
+  background-color: rgb(75, 75, 75);
+}
+.submitBtn:hover {
+  background-color: rgb(103, 103, 103);
+}
+.closeBtn {
+  padding: 1rem;
+  margin: 0 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   border-radius: 24px;
   border: 0;
   background-color: white;
 }
-.submit button:hover {
+.closeBtn:hover {
   background-color: #ededed;
 }
 .open {

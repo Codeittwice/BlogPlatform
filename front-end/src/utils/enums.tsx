@@ -6,5 +6,6 @@ export enum Priorities {
 
 export enum Pathnames {
   home = "/",
+  new = "/new",
 }
 export default undefined;

@@ -32,6 +32,13 @@
   text-align: center;
   text-decoration: underline;
 }
+.deleteLink {
+  color: white;
+  background-color: red;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+}
 .link-container {
   padding-left: 30px;
   margin: 0px;
@@ -44,4 +51,8 @@
 .text-shadow {
   text-shadow: -1px 0 rgb(32, 32, 32), 0 1px rgb(32, 32, 32),
     1px 0 rgb(32, 32, 32), 0 -1px rgb(32, 32, 32);
+}
+
+.card {
+  display: flex;
 }

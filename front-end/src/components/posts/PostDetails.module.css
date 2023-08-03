@@ -54,3 +54,8 @@
 .back:hover {
   background-color: #ededed;
 }
+
+.timestamps {
+  font-style: italic;
+  color: grey;
+}
