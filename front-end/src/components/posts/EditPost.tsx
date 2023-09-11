@@ -1,11 +1,10 @@
 import { useRouter } from "next/router";
 import PostForm from "./PostForm";
-import useReadPostSingle from "@/dataFetching/useReadPostSingle";
-import useUpdatePost from "@/dataFetching/useUpdatePost";
-import { PostType } from "@/utils/types";
+import { PostType, PostUpdate } from "@/utils/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Pathnames } from "@/utils/enums";
+import { PathNames } from "@/utils/enums";
+import Spinner from "../Spinner";
 
 const EditPost = () => {
   const router = useRouter();
@@ -16,18 +15,11 @@ const EditPost = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get(url, {
+        const res = await axios.get<PostType>(url, {
           responseType: "json",
         });
-        const postData = res.data;
-        const postsArr: PostType = {
-          _id: postData._id,
-          key: postData._id.toString(),
-          title: postData.title,
-          description: postData.description,
-        };
 
-        setPost(postsArr);
+        setPost(res.data);
       } catch (e) {
         console.log(e);
       }
@@ -37,24 +29,30 @@ const EditPost = () => {
 
   const onSubmit = async (updates: any) => {
     try {
-      await axios.patch(
-        url,
-        {
-          title: updates.title,
-          description: updates.description,
-        },
-        {
-          responseType: "json",
-        }
-      );
+      const body: PostUpdate = {
+        title: updates.title,
+        description: updates.description,
+      };
+      await axios.patch(url, body, {
+        responseType: "json",
+      });
     } catch (e) {
       console.log(e);
     }
-    router.push(Pathnames.home);
+    router.push(PathNames.Home);
   };
-  const onClose = () => {
-    router.push(Pathnames.home + _id);
-  };
+
+  const onClose = () => router.push(PathNames.Home + _id);
+
+  if (!post)
+    return (
+      <div>
+        <h2>Couldn't find post!</h2>
+        <p>Please, try again later or with a different address.</p>
+        <Spinner />
+      </div>
+    );
+
   return (
     <>
       <h1>Edit Post</h1>

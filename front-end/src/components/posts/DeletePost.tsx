@@ -1,29 +1,28 @@
 import { useRouter } from "next/router";
-import Card from "../Card";
 import axios from "axios";
 import styles from "./DeletePost.module.css";
 import PostDetails from "./PostDetails";
-import { Pathnames } from "@/utils/enums";
+import { PathNames } from "@/utils/enums";
 
 const DeletePost = () => {
   const router = useRouter();
   const _id = router.query._id;
 
   const onConfirm = async () => {
-    const url = `http://localhost:8000/posts/${_id}`;
     try {
-      const res = await axios.delete(url, {
+      ///Id validity
+      const res = await axios.delete(`http://localhost:8000/posts/${_id}`, {
         responseType: "json",
       });
       console.log(res);
     } catch (e) {
       console.log(e);
     }
-    router.push(Pathnames.home);
+    router.push(PathNames.Home);
   };
-  const onClose = () => {
-    router.push(Pathnames.home + _id);
-  };
+
+  const onClose = () => router.push(PathNames.Home + _id);
+
   return (
     <>
       <div className={styles.new}>
@@ -41,5 +40,3 @@ const DeletePost = () => {
 };
 
 export default DeletePost;
-
-//<input type="text" placeholder="Priority" ref={priority} />

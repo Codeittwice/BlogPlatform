@@ -2,13 +2,12 @@ import styles from "./Header.module.css";
 import logo from "../../img/logo.jpg";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Pathnames } from "@/utils/enums";
-import Card from "../Card";
+import { PathNames } from "@/utils/enums";
 
 const Header = () => {
   const router = useRouter();
   let showPostNavigation = false;
-  if (router.pathname !== Pathnames.home && router.pathname !== Pathnames.new)
+  if (router.pathname !== PathNames.Home && router.pathname !== PathNames.New)
     showPostNavigation = true;
   return (
     <>

@@ -1,50 +1,58 @@
 import Card from "../Card";
 import styles from "./PostDetails.module.css";
 import { useRouter } from "next/router";
-import { Pathnames } from "@/utils/enums";
-import { PostType, PostTypeWithTimestamps } from "@/utils/types";
+import { PathNames } from "@/utils/enums";
+import { PostTypeWithTimestamps } from "@/utils/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Spinner from "../Spinner";
+import { getPrettyDate } from "@/utils/dateFormating";
 
 const PostDetails = (props: any) => {
   const router = useRouter();
   const [post, setPost] = useState<PostTypeWithTimestamps>();
+  const [errorMsg, setErrorMsg] = useState("");
   const _id = props._id;
-  const url = `http://localhost:8000/posts/${_id}`;
 
   useEffect(() => {
     async function fetchData() {
-      console.log(_id);
       try {
-        console.log(url);
-        const res = await axios.get(url, {
-          responseType: "json",
-        });
-        const postData = res.data;
-        const postsArr: PostTypeWithTimestamps = {
-          _id: postData._id,
-          key: postData._id.toString(),
-          title: postData.title,
-          description: postData.description,
-          createdAt: postData.createdAt,
-          updatedAt: postData.updatedAt,
-        };
-
-        setPost(postsArr);
-        console.log(postsArr);
+        const res = await axios.get<PostTypeWithTimestamps>(
+          `http://localhost:8000/posts/${_id}`,
+          {
+            responseType: "json",
+          }
+        );
+        setPost(res.data);
+        console.log(res.status);
+        setErrorMsg(res.status + " " + res.statusText);
+        throw res.status + " " + res.statusText;
       } catch (e) {
-        console.log(e);
+        if (e instanceof Error) {
+          // e is narrowed to Error!
+          console.log(errorMsg);
+          setErrorMsg(e.message);
+          //console.log(e);
+        }
       }
     }
     fetchData();
   }, [_id]);
 
-  if (!post) return;
+  if (!post)
+    return (
+      <div>
+        <h1>{errorMsg}</h1>
+        <h2>Couldn't find post!</h2>
+        <p>Please, try again later or with a different address.</p>
+        <Spinner />
+      </div>
+    );
   const { title, description } = post;
-  const createdAt = new Date(post.createdAt).toUTCString();
-  const updatedAt = new Date(post.updatedAt).toUTCString();
+  const createdAt = getPrettyDate(new Date(post.createdAt));
+  const updatedAt = getPrettyDate(new Date(post.updatedAt));
   const backButtonHandler = () => {
-    router.push(Pathnames.home);
+    router.push(PathNames.Home);
   };
   return (
     <>
@@ -53,8 +61,8 @@ const PostDetails = (props: any) => {
           <h1>{title}</h1>
           <h4>{description}</h4>
           <div className={styles.timestamps}>
-            <p>Created at: {createdAt}</p>
-            <p>Updated at: {updatedAt}</p>
+            <p>Created at {createdAt}.</p>
+            <p>Updated at {updatedAt}.</p>
           </div>
         </div>
       </Card>

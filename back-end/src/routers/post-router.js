@@ -1,4 +1,5 @@
 const express = require("express");
+const { MongoClient, ObjectId } = require("mongodb");
 const Post = require("../models/post-model");
 
 const router = new express.Router();
@@ -31,8 +32,9 @@ router.get("/posts", async (req, res) => {
 
 /// READ POST SINGLE
 router.get("/posts/:id", async (req, res) => {
+  const _id = req.params.id;
   try {
-    const post = await Post.findOne({ id: req.params.id });
+    const post = await Post.findById(_id);
 
     if (!post) {
       return res.status(404).send();
@@ -46,6 +48,7 @@ router.get("/posts/:id", async (req, res) => {
 
 /// UPDATE POST
 router.patch("/posts/:id", async (req, res) => {
+  const _id = req.params.id;
   const updates = Object.keys(req.body);
   const allowedUpdates = ["title", "description"];
   const isValidOperation = updates.every((update) =>
@@ -57,7 +60,7 @@ router.patch("/posts/:id", async (req, res) => {
   }
 
   try {
-    const post = await Post.findOne({ _id: req.params.id });
+    const post = await Post.findOne({ _id });
 
     if (!post) {
       return res.status(404).send();
@@ -73,8 +76,9 @@ router.patch("/posts/:id", async (req, res) => {
 
 /// DELETE POST
 router.delete("/posts/:id", async (req, res) => {
+  const _id = req.params.id;
   try {
-    const post = await Post.findOneAndDelete({ _id: req.params.id });
+    const post = await Post.findOneAndDelete({ _id });
 
     if (!post) {
       return res.status(404).send();
